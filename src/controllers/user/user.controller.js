@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
+
 import { users as User, refreshTokens as RefreshToken } from '../../models'
 import { successResponse, errorResponse } from '../../helpers'
 
@@ -31,7 +32,7 @@ export const register = async (req, res) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: process.env.JWT_EXPIRY,
+        expiresIn: `${process.env.JWT_EXPIRY}s`,
       }
     )
     let refreshToken = await RefreshToken.createToken(newUser)
@@ -60,20 +61,22 @@ export const login = async (req, res) => {
     if (reqPass !== user.password) {
       throw new Error('Incorrect Email Id/Password')
     }
+
     const accessToken = jwt.sign(
       {
         user: {
           userId: user.id,
           email: user.email,
-          createdAt: new Date(),
         },
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: process.env.JWT_EXPIRY,
+        expiresIn: `${process.env.JWT_EXPIRY}s`,
       }
     )
+
     let refreshToken = await RefreshToken.createToken(user)
+
     delete user.dataValues.password
     return successResponse(req, res, {
       accessToken,

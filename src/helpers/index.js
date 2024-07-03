@@ -12,7 +12,7 @@ export const errorResponse = (
   code = 500,
   error = {}
 ) =>
-  res.status(500).json({
+  res.status(code).json({
     code,
     errorMessage,
     error,

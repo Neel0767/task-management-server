@@ -24,7 +24,6 @@ module.exports = (sequelize, Sequelize) => {
         user: {
           userId: user.id,
           email: user.email,
-          createdAt: new Date(),
         },
       },
       process.env.JWT_SECRET,

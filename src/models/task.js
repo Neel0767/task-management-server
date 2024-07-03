@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
       },
       title: DataTypes.STRING,
-      desc: DataTypes.STRING,
+      description: DataTypes.STRING,
       status: {
         type: DataTypes.ENUM('pending', 'completed', 'overdue'),
         defaultValue: 'pending',
