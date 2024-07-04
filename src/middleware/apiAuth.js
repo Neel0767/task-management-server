@@ -2,7 +2,6 @@ import { errorResponse } from '../helpers'
 import { users as User } from '../models'
 
 import jwt from 'jsonwebtoken'
-
 const apiAuth = async (req, res, next) => {
   if (!req.headers['authorization']) {
     return errorResponse(req, res, 'Token is not provided', 401)

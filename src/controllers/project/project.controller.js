@@ -38,6 +38,7 @@ export const viewProjectById = async (req, res) => {
       where: { id },
       include: [{ model: Team }, { model: Task }],
     })
+    if (!project) return errorResponse(req, res, 'Project does not exist', 404)
     return successResponse(req, res, project)
   } catch (error) {
     return errorResponse(req, res, error.message)
@@ -64,6 +65,9 @@ export const updateProject = async (req, res) => {
   const payload = {}
   if (description === undefined) payload['description'] = description
   const project = await Project.findOne({ where: { id } })
+
+  if (!project) return errorResponse(req, res, 'Project does not exist', 404)
+
   if (title) project.set('title', title)
   if (description) project.set('description', description)
   if (teamId) project.set('teamId', teamId)

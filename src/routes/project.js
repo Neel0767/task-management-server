@@ -7,7 +7,7 @@ import * as projectValidator from '../controllers/project/project.validator'
 
 const router = express.Router()
 
-router.get('/', apiAuth, projectController.viewAllProjects)
+router.get('/', projectController.viewAllProjects)
 router.get('/:id', projectController.viewProjectById)
 router.post(
   '/',

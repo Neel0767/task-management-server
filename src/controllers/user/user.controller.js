@@ -1,7 +1,13 @@
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
 
-import { users as User, refreshTokens as RefreshToken } from '../../models'
+import {
+  users as User,
+  refreshTokens as RefreshToken,
+  projects as Project,
+  teams as Team,
+  tasks as Task,
+} from '../../models'
 import { successResponse, errorResponse } from '../../helpers'
 
 export const register = async (req, res) => {
@@ -130,5 +136,47 @@ export const refreshToken = async (req, res) => {
     })
   } catch (err) {
     return res.status(500).send({ message: err })
+  }
+}
+
+export const dashboard = async (req, res) => {
+  try {
+    const { userId: id } = req.user
+    const user = await User.findOne({
+      where: { id },
+      include: [
+        {
+          model: Team,
+          include: [{ model: Project }],
+        },
+      ],
+    })
+
+    // Count number of projects associated
+    const a = []
+    const projectsNumber = user.teams.reduce(
+      (acc, team) => acc + team.projects.length,
+      0
+    )
+
+    // Count assigned tasks
+    const tasksNumber = await Task.count({ where: { userId: id } })
+    return successResponse(req, res, {
+      id: user.id,
+      name: user.name,
+      projectsNumber,
+      tasksNumber,
+    })
+  } catch (error) {
+    return errorResponse(req, res, error.message)
+  }
+}
+
+export const getUsers = async(req, res) => {
+  try {
+    const users = await User.findAll();
+    return successResponse(req, res, users)
+  } catch (error) {
+    return errorResponse(req, res, error.message)
   }
 }

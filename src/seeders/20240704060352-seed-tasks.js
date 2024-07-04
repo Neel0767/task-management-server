@@ -1,0 +1,116 @@
+'use strict'
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert(
+      'tasks',
+      [
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0871',
+          title: 'Task 1',
+          description: 'Description for Task 1',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0861',
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0854',
+          status: 'completed',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0872',
+          title: 'Task 2',
+          description: 'Description for Task 2',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0861',
+          userId: null,
+          status: 'pending',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0873',
+          title: 'Task 3',
+          description: 'Description for Task 3',
+          projectId: null,
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0855',
+          status: 'overdue',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0874',
+          title: 'Task 4',
+          description: 'Description for Task 4',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0862',
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0856',
+          status: 'pending',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0875',
+          title: 'Task 5',
+          description: 'Description for Task 5',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0862',
+          userId: null,
+          status: 'completed',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0876',
+          title: 'Task 6',
+          description: 'Description for Task 6',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0863',
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0857',
+          status: 'pending',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0877',
+          title: 'Task 7',
+          description: 'Description for Task 7',
+          projectId: null,
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0858',
+          status: 'overdue',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0878',
+          title: 'Task 8',
+          description: 'Description for Task 8',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0863',
+          userId: null,
+          status: 'pending',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0879',
+          title: 'Task 9',
+          description: 'Description for Task 9',
+          projectId: 'd290f1ee-6c54-4b01-90e6-d701748f0863',
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0854',
+          status: 'completed',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 'd290f1ee-6c54-4b01-90e6-d701748f0880',
+          title: 'Task 10',
+          description: 'Description for Task 10',
+          projectId: null,
+          userId: 'd290f1ee-6c54-4b01-90e6-d701748f0856',
+          status: 'overdue',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    )
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('tasks', null, {})
+  },
+}
