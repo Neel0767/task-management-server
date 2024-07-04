@@ -29,7 +29,7 @@ app.use(
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use('/', apiAuth, apiRoutes)
+app.use('/', apiRoutes)
 app.use('/auth', authRoutes)
 app.use('/projects', apiAuth, projectRoutes)
 app.use('/teams', apiAuth, teamRoutes)

@@ -58,7 +58,7 @@ module.exports = {
       // Add foreign key to tasks table for the relationship with users
       await queryInterface.addColumn(
         'tasks',
-        'assignedUserId',
+        'userId',
         {
           type: Sequelize.UUID,
           references: {
