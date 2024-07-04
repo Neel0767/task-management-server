@@ -6,6 +6,7 @@ const x = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mysql',
   },
   test: {
@@ -13,6 +14,7 @@ const x = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
   },
   production: {
@@ -20,6 +22,7 @@ const x = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mysql',
   },
 }
