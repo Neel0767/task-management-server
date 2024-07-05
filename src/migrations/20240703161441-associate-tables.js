@@ -4,7 +4,6 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const transaction = await queryInterface.sequelize.transaction()
     try {
-      // Create user_teams join table for the many-to-many relationship between users and teams
       await queryInterface.createTable(
         'user_teams',
         {
@@ -29,12 +28,12 @@ module.exports = {
           createdAt: {
             allowNull: false,
             type: Sequelize.DATE,
-            defaultValue: Sequelize.fn('NOW'),
+            defaultValue: Sequelize.NOW,
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
-            defaultValue: Sequelize.fn('NOW'),
+            defaultValue: Sequelize.NOW,
           },
         },
         { transaction }
@@ -84,9 +83,25 @@ module.exports = {
         },
         { transaction }
       )
-      transaction.commit()
+      // Add relation between user and refreshToken tables
+      await queryInterface.addColumn(
+        'refreshTokens',
+        'userId',
+        {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'users',
+            key: 'id',
+          },
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE',
+        },
+        { transaction }
+      )
+      await transaction.commit()
     } catch (err) {
-      transaction.rollback()
+      await transaction.rollback()
     }
   },
 
@@ -94,15 +109,18 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction()
     try {
       await queryInterface.removeColumn('projects', 'teamId', { transaction })
-      await queryInterface.removeColumn('tasks', 'assignedUserId', {
+      await queryInterface.removeColumn('tasks', 'userId', {
+        transaction,
+      })
+      await queryInterface.removeColumn('refreshTokens', 'userId', {
         transaction,
       })
       await queryInterface.removeColumn('tasks', 'projectId', { transaction })
       await queryInterface.dropTable('user_teams', { transaction })
 
-      transaction.commit()
+      await transaction.commit()
     } catch (err) {
-      transaction.rollback()
+      await transaction.rollback()
       throw err
     }
   },

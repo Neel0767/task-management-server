@@ -17,7 +17,7 @@ import db from './src/models'
 dotenv.config()
 require('./src/config/sequelize')
 
-// db.sequelize.sync({ alter: true })
+db.sequelize.sync({ alter: true })
 
 const app = express()
 
